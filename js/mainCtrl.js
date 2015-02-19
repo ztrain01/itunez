@@ -10,6 +10,7 @@ app.controller('mainCtrl', function($scope, itunesService){
       sortInfo: {fields: ['Song', 'Artist', 'Collection', 'Type'], directions: ['asc']},
       columnDefs: [
         {field: 'Play', displayName: 'Play', width: '40px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a href="{{row.getProperty(col.field)}}"><img src="http://www.icty.org/x/image/Miscellaneous/play_icon30x30.png"></a></div>'},
+        {field: 'Song', displayName: 'Song'},
         {field: 'Artist', displayName: 'Artist'},
         {field: 'Collection', displayName: 'Collection'},
         {field: 'AlbumArt', displayName: 'Album Art', width: '110px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img src="{{row.getProperty(col.field)}}"></div>'},
@@ -37,6 +38,7 @@ app.controller('mainCtrl', function($scope, itunesService){
       
       $scope.songData = songs.map(function(itunesFormattedResult){
         return {
+          Song: itunesFormattedResult.trackName,
           AlbumArt: itunesFormattedResult.artworkUrl100,
           Artist: itunesFormattedResult.artistName,
           Collection: itunesFormattedResult.collectionName,
@@ -55,6 +57,7 @@ app.controller('mainCtrl', function($scope, itunesService){
     var newArray = [];
     for (var i = data.length - 1; i >= 0; i--) {
       var newObj = {}
+      newObj.Song = data[i].trackName
       newObj.AlbumArt = data[i].artworkUrl100
       newObj.Artist = data[i].artistName
       newObj.Collection = data[i].collectionName
