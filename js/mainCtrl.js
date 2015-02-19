@@ -52,7 +52,17 @@ app.controller('mainCtrl', function($scope, itunesService){
   //Check that the above method is working by entering a name into the input field on your web app, and then console.log the result
 
   function messageDataFromItunes(data){
-      
+    var newArray = [];
+    for (var i = data.length - 1; i >= 0; i--) {
+      var newObj = {}
+      newObj.AlbumArt = data[i].artworkUrl100
+      newObj.Artist = data[i].artistName
+      newObj.Collection = data[i].collectionName
+      newObj.CollectionPrice = data[i].collectionPrice
+      newObj.Play = data[i].previewUrl
+      newObj.Type = data[i].kind
+    }
+    return newArray
   }
 
   //If everything worked you should see a huge array of objects inside your console. That's great! But unfortunately that's not what ng-grid is expecting. What you need to do now
