@@ -32,14 +32,28 @@ app.controller('mainCtrl', function($scope, itunesService){
     //Code here
   $scope.getSongData = function() {
     itunesService.getSongs($scope.artist).then(function(songs){
-      $scope.songData = songs
+      
+      console.log(songs);
+      
+      $scope.songData = songs.map(function(itunesFormattedResult){
+        return {
+          AlbumArt: itunesFormattedResult.artworkUrl100,
+          Artist: itunesFormattedResult.artistName,
+          Collection: itunesFormattedResult.collectionName,
+          CollectionPrice: itunesFormattedResult.collectionPrice,
+          Play: itunesFormattedResult.previewUrl,
+          Type: itunesFormattedResult.kind,
+        }
+      })
     })
   }
 
 
   //Check that the above method is working by entering a name into the input field on your web app, and then console.log the result
 
-
+  function messageDataFromItunes(data){
+      
+  }
 
   //If everything worked you should see a huge array of objects inside your console. That's great! But unfortunately that's not what ng-grid is expecting. What you need to do now
   //is sort the data you got back to be an object in the following format.
